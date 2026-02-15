@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Fingerprint Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Fingerprint Detector</h1>
+    <p>Upload a fingerprint image to detect whether it is <b>Live</b> or <b>Spoof</b>.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <br><br>
+        <button type="submit">Analyze Fingerprint</button>
+    </form>
+
+    {% if image %}
+        <img src="{{ image }}" class="preview">
+    {% endif %}
+
+    {% if prediction %}
+        <div class="result {% if 'LIVE' in prediction %}live{% else %}spoof{% endif %}">
+            {{ prediction }} <br>
+            Confidence: {{ confidence }}%
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        AI-Based Fingerprint Liveness Detection System
+    </div>
+</div>
+
+</body>
+</html>

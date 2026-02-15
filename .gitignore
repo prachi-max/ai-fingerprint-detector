@@ -1,0 +1,13 @@
+venv_tf/
+dataset/
+.vscode/
+__pycache__/
+*.pyc
+.DS_Store
+*.npy
+*.h5
+dataset/
+venv_tf/
+__pycache__/
+.ipynb_checkpoints/
+git 
