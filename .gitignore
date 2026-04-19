@@ -11,3 +11,7 @@ venv_tf/
 __pycache__/
 .ipynb_checkpoints/
 git 
+venv/
+tf_env/
+__pycache__/
+*.pyc

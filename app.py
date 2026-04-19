@@ -17,8 +17,12 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "cnn_fingerprint_spoof.h5")
 
 print("Looking for model at:", MODEL_PATH)
 
-model = tf.keras.models.load_model(MODEL_PATH)
-print("✅ Model loaded successfully")
+interpreter = tf.lite.Interpreter(model_path="models/model.tflite")
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+print(" Model loaded successfully")
 
 # ---------------- FUNCTIONS ----------------
 def preprocess_image(image_path):
@@ -44,7 +48,10 @@ def index():
             file.save(image_path)
 
             img = preprocess_image(image_path)
-            prob = model.predict(img)[0][0]
+            interpreter.set_tensor(input_details[0]['index'], img.astype(np.float32))
+            interpreter.invoke()
+
+            prob = interpreter.get_tensor(output_details[0]['index'])[0][0]
 
             confidence = round(prob * 100, 2)
 
@@ -59,6 +66,7 @@ def index():
         confidence=confidence,
         image=image_path
     )
+
 
 # ---------------- RUN ----------------
 # if __name__ == "__main__":
