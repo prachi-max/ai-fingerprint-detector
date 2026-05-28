@@ -74,7 +74,7 @@ To get a local copy up and running, follow these steps.
 Clone the repository:
 
 ```bash id="h4jw9f"
-git clone https://github.com/prachi-max/ai-fingerprint-detector/.git
+git clone https://github.com/prachi-max/ai-fingerprint-detector.git
 ```
 
 Move to the project directory:
